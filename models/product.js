@@ -25,6 +25,14 @@ const productSchema = new mongoose.Schema({
     category:{
         type:ObjectId,
         ref:"Category"
+    },
+    stock:{
+        type:Number,
+        required:true
+    },
+    sold:{
+        type:Number,
+        default:0
     }
 },{timestamps:true});
 

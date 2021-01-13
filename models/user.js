@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const uuidv1=require('uuid/v1');
 
 const userSchema= new mongoose.Schema({
-    user:{
+    name:{
         type:String,
         required:true,
         maxlength:32,
@@ -11,14 +11,12 @@ const userSchema= new mongoose.Schema({
     },
     lastname:{
         type:String,
-        required:false,
         maxlength:32
     },
     email:{
         type:String,
         trim:true,
         required:true,
-        trim:true
     },
     userinfo:{
         type:String,
@@ -49,12 +47,11 @@ const userSchema= new mongoose.Schema({
             return this._password;
         });
 
-    userSchema.method ={
+    userSchema.methods ={
 
         authinticate: function(plainpassword){
             return this.securePassword(plainpassword) === this.encry_password;
         },
-
         securePassword: function(plainpassword){
             if(!plainpassword) return "";
             try{
