@@ -33,6 +33,6 @@ mongoose.connect(process.env.DATABASE,
 
  const PORT=process.env.PORT || 8000;
 
-app.listen(PORT,(req,res)=> {
+app.listen(PORT,()=> {
     console.log(`App is running on port ${PORT}`);
 })
