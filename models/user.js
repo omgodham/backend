@@ -49,7 +49,7 @@ const userSchema= new mongoose.Schema({
 
     userSchema.methods ={
 
-        authinticate: function(plainpassword){
+        authenticate: function(plainpassword){
             return this.securePassword(plainpassword) === this.encry_password;
         },
         securePassword: function(plainpassword){
