@@ -5,7 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
+
 const authRouters = require('./routes/auth');
+const userRouters = require('./routes/user');
+const categoryRouters = require('./routes/category');
+
 
 //DB CONNECTION
 mongoose.connect(process.env.DATABASE,
@@ -30,9 +34,10 @@ mongoose.connect(process.env.DATABASE,
  });
 
  app.use('/api',authRouters);
+ app.use('/api',userRouters);
+ app.use('/api',categoryRouters);
 
- const PORT=process.env.PORT || 8000;
 
-app.listen(PORT,()=> {
-    console.log(`App is running on port ${PORT}`);
+app.listen(process.env.PORT || 8000,()=> {
+    console.log(`App is running on port ${process.env.PORT}`);
 })

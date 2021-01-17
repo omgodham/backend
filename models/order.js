@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose.Schema;
 
-
-const productCart =new mongoose.Schema({
+//This is product in cart
+const productCartSchema =new mongoose.Schema({
     product:{
         type:ObjectId,
         ref:'Product'
@@ -12,7 +12,8 @@ const productCart =new mongoose.Schema({
     price:Number,
 },{timestamps:true});
 
-const ProductCartSchema = mongoose.model('ProductCartSchema',productCartSchema);
+const ProductCart = mongoose.model('ProductCartSchema',productCartSchema);
+
 
 const orderSchema = new mongoose.Schema({
     products:[productCartSchema],
@@ -22,7 +23,7 @@ const orderSchema = new mongoose.Schema({
     updated:Date,
     user:{
         type:ObjectId,
-        ref="User"
+        ref:"User"
     },
 },{timestamps:true});
 

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const router = express.Router();
-const {signout,signup,signin} = require('../controllers/auth');
+const {signout,signup,signin,isSignedIn} = require('../controllers/auth');
 
 const { check } = require('express-validator');
 
@@ -22,5 +22,14 @@ router.post('/signin',[
 
 //Signout Route
 router.get('/signout',signout);
+
+//Protected route for testing purpose
+router.get('/protected',isSignedIn,(req,res)=>{
+    // res.send('Protected Route');
+    res.json(req.auth);  
+})
+
+
+
 
 module.exports = router;
