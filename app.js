@@ -10,6 +10,7 @@ const authRouters = require('./routes/auth');
 const userRouters = require('./routes/user');
 const categoryRouters = require('./routes/category');
 const productRouters = require('./routes/product');
+const orderRouters = require('./routes/order');
 
 
 //DB CONNECTION
@@ -38,6 +39,7 @@ mongoose.connect(process.env.DATABASE,
  app.use('/api',userRouters);
  app.use('/api',categoryRouters);
  app.use('/api',productRouters);
+ app.use('/api',orderRouters);
 
 app.listen(process.env.PORT || 8000,()=> {
     console.log(`App is running on port ${process.env.PORT}`);

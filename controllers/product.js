@@ -136,7 +136,7 @@ exports.getAllProducts = (req,res) => {
     let limit = req.query.limit ? parseInt(req.query.limit) : 8;
     let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
     Product.find()
-    .select('-photo')
+    .select('-photo') //only photo will not there due to - sign
     .sort([[sortBy,'asc']])
     .limit(limit)
     .exec((err,products) =>{
