@@ -38,7 +38,7 @@ exports.updateCategory = (req, res) => {
   Category.findOneAndUpdate(
     { _id: req.category._id },
     { $set: { name: category } },
-    { new: true },
+    { new: true,useFindAndModify:false },
     (err, updatedCategory) => {
       if (err) {
         return res.status(400).json({

@@ -17,9 +17,9 @@ const productSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-    //   required: true,
-    //   maxlength: 32,
-    //   trim: true
+      required: true,
+      maxlength: 32,
+      trim: true
     },
     category: {
       type: ObjectId,

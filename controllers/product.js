@@ -15,6 +15,7 @@ exports.getProductById = (req,res,next,id) => {
                 })
             }
             req.product = product;
+            // console.log(req.product);
             next();
         })
 }
@@ -29,13 +30,13 @@ exports.createProduct = (req,res) => {
                 error:'cannot create product'
             })
         }
-               // const {name,description,price,category,stock} = fields;
+               const {name,description,price,category,stock} = fields;
 
-        // if(!name || !description || !price || !category || !stock){
-        //     return res.status(400).json({
-        //         error:'Input all fields'
-        //     })
-        // }
+        if(!name || !description || !price || !category || !stock){
+            return res.status(400).json({
+                error:'Input all fields'
+            })
+        }
         let product = new Product(fields);
         
         if(file.photo){
@@ -70,16 +71,17 @@ exports.getProduct = (req,res) => {
 //remove product
 exports.deleteProduct = (req,res) =>{
     let product = req.product;
-    product.remove().exec((err,deletedProduct) => {
+    Product.deleteOne({_id:product._id}).exec((err,deletedProduct) => {
         if(err){
             return res.status(400).json({
-                err:'unable to delete product'
+                error:'unable to delete product'
             })
         }
         res.json({
-            message:'deleted successfully',
-            deletedProduct});
+            message:'deleted successfully'
+        });
     });
+    // product.remove()
 }
 
 //update product

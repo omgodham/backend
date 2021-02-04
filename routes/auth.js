@@ -12,6 +12,8 @@ router.post('/signup',[
     check('email','enter valid email').isEmail(),
     check('password','password should be minimum of three char').isLength({min:3})
 ],signup); 
+
+//signout route
 router.get('/signout',signout);
 
 //Signin Route

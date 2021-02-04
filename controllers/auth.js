@@ -5,11 +5,9 @@ const { check , validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
-exports.signup = (req,res)=>{
-    
-    
+exports.signup = (req,res)=>{  
     const errors = validationResult(req);
-    // console.log(errors);
+     console.log(errors);
 
     //If any validation errors 
     if(!errors.isEmpty()){
@@ -57,13 +55,22 @@ exports.signin = (req,res) => {
             }
             //Token Creation
             const token = jwt.sign({id:user._id},process.env.SECRET);
-            //Token save using cookie
+            //Token saving using cookie(which is given by cookie parser)
             res.cookie('token',token,{expires: new Date(Date.now() + 999)});
             const {_id,name,role} = user;
             return res.json({token,user:{_id,name,email,role}});
         })
 
 }
+
+
+//signout 
+exports.signout = (req,res)=>{
+  return  res.json({
+         message:'signout successful'
+     });
+ }
+ 
 
 //Middleware coming from expreess
 exports.isSignedIn = expressJwt({
@@ -93,7 +100,4 @@ exports.isSignedIn = expressJwt({
         }    
 
   
-exports.signout = (req,res)=>{
-    res.send('User Signout');
-}
 
