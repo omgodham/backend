@@ -11,6 +11,7 @@ const userRouters = require('./routes/user');
 const categoryRouters = require('./routes/category');
 const productRouters = require('./routes/product');
 const orderRouters = require('./routes/order');
+const stripeRouters = require('./routes/stripe');
 
 
 //DB CONNECTION
@@ -40,6 +41,7 @@ mongoose.connect(process.env.DATABASE,
  app.use('/api',categoryRouters);
  app.use('/api',productRouters);
  app.use('/api',orderRouters);
+ app.use('/api',stripeRouters);
 
 app.listen(process.env.PORT || 8000,()=> {
     console.log(`App is running on port ${process.env.PORT}`);
