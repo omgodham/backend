@@ -166,10 +166,12 @@ Product.distinct('category',{},(err,categories) =>{ //distinct gives only catego
 //middleware to update stock
 exports.updateStock = (req, res, next) => {
     let myOperations = req.body.order.products.map(prod => {
+        let updatedStock = prod.stock - 1;
+        let updatedSold = prod.sold + 1;
       return {
         updateOne: {
           filter: { _id: prod._id },
-          update: { $inc: { stock: (prod.stock - 1), sold: (prod.sold + 1) } }
+          update: { $set: { stock: updatedStock, sold: updatedSold } }
         }
       };
     });
