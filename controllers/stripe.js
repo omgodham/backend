@@ -2,7 +2,7 @@ const uuid = require('uuid/v4');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 exports.makePayment = (req,res) => {
-   const {products,token,amount} = req.body;
+   const {token,amount} = req.body;
    const idempotencyKey = uuid();
    console.log(amount);
     return stripe.customers.create({

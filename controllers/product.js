@@ -164,21 +164,23 @@ Product.distinct('category',{},(err,categories) =>{ //distinct gives only catego
 }
 
 //middleware to update stock
-exports.updateStock = (req,res,next) =>{
- let myOperations = req.order.products.map( prod => {
-     return {
-         updateOne:{
-         filter:{_id:prod._id},
-         update:{$inc :{stock:-prod.count,sold:+prod.count}}
-     }
-     }
- });
-    Product.bulkWrite(myOperations,{},(err,products)=>{
-        if(err){
-            return res.status(400).json({
-                error:'not able to update stock'
-            })
+exports.updateStock = (req, res, next) => {
+    let myOperations = req.body.order.products.map(prod => {
+      return {
+        updateOne: {
+          filter: { _id: prod._id },
+          update: { $inc: { stock: (prod.stock - 1), sold: (prod.sold + 1) } }
         }
-        next();
-    });   
-}
+      };
+    });
+  console.log(myOperations[0].updateOne);
+    Product.bulkWrite(myOperations, {}, (err, products) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Bulk operation failed"
+        });
+      }
+      next();
+    });
+  };
+  

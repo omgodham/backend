@@ -20,6 +20,7 @@ exports.getOrderById = (req, res, id, next) => {
 exports.createOrder = (req, res) => {
   req.body.order.user = req.profile;
   const order = new Order(req.body.order);
+  // console.log(order);
   order.save((err, order) => {
     if (err) {
       res.status(400).json({

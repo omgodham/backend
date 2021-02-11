@@ -14,6 +14,8 @@ exports.getUserById = (req,res,next,id)=>{
  });      
 };
 
+
+
 //This is to get User Profile
 exports.getUser = (req,res) =>{
     req.profile.encry_password=undefined;
@@ -61,7 +63,7 @@ exports.userPurchaseList = (req,res) =>{
 
 exports.pushOrderInUserPurchaseList = (req,res,next) =>{
     let purchases =[];
-    req.order.products.forEach( product =>{
+    req.body.order.products.forEach( product =>{
         purchases.push({
             _id:product._id,
             name:product.name,
@@ -69,8 +71,9 @@ exports.pushOrderInUserPurchaseList = (req,res,next) =>{
             category:product.category,
             quantity:product.quantity,
             amount:req.body.order.amount,
-            transaction_id:req.body.sorder.transaction_id
+            transaction_id:req.body.order.transaction_id
         });
+       
     })
 
     //Now store this purchases array in purchases of user

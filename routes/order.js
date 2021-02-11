@@ -12,7 +12,12 @@ router.param('userId',getUserById);
 router.param('orderId',getOrderById);
 
 //write routers 
-router.post('/order/create/:userId',isSignedIn,isAuthenticate,pushOrderInUserPurchaseList,updateStock,createOrder);
+router.post('/order/create/:userId',
+isSignedIn,
+isAuthenticate,
+pushOrderInUserPurchaseList,
+updateStock,
+createOrder);
 
 
 //read routers

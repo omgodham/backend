@@ -11,7 +11,8 @@ const userRouters = require('./routes/user');
 const categoryRouters = require('./routes/category');
 const productRouters = require('./routes/product');
 const orderRouters = require('./routes/order');
-const stripeRouters = require('./routes/stripe');
+const stripeRouters = require('./routes/stripe');//not using in this project we used in secondary branch
+const braintreeRouters = require('./routes/braintree');
 
 
 //DB CONNECTION
@@ -19,7 +20,8 @@ mongoose.connect(process.env.DATABASE,
     {
         useNewUrlParser:true,
         useUnifiedTopology:true,
-        useCreateIndex:true
+        useCreateIndex:true,
+        useFindAndModify: false
     }).then(() => {
         console.log("DB CONNECTED");
     }).catch((err) => console.log(err))
@@ -42,6 +44,7 @@ mongoose.connect(process.env.DATABASE,
  app.use('/api',productRouters);
  app.use('/api',orderRouters);
  app.use('/api',stripeRouters);
+ app.use('/api',braintreeRouters);
 
 app.listen(process.env.PORT || 8000,()=> {
     console.log(`App is running on port ${process.env.PORT}`);
